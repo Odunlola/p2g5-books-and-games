@@ -3,8 +3,7 @@ const express = require("express");
 const router = express.Router();
 
 // linking products model
-// DISABLED TEMPORARILY UNTIL MODELS IS AVAILABLE
-// const {Products} = require("../models");
+const {Products} = require("../models");
 
 // index route
 router.get("/",async(req,res,next)=>{
