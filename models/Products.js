@@ -1,6 +1,6 @@
 const mongoose = require("../config/connection");
 
-//pull schema and model from mongoose
+//making Product Schema
 const productSchema = new mongoose.Schema(
     {
         name:{
@@ -27,5 +27,6 @@ const productSchema = new mongoose.Schema(
     }
 );
 
+//make Products model
 const Products = mongoose.model("Products", productSchema);
 module.exports = Products;
