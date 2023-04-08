@@ -1,0 +1,21 @@
+{
+  "name": "p2g5-books-and-games",
+  "version": "1.0.0",
+  "description": "Group Project on Books and Games",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Odunlola/p2g5-books-and-games.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Odunlola/p2g5-books-and-games/issues"
+  },
+  "homepage": "https://github.com/Odunlola/p2g5-books-and-games#readme"
+}
