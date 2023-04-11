@@ -2,6 +2,8 @@
 const express = require("express");
 const router = express.Router();
 
+const seededData = require("../models/seededData");
+
 // linking products model
 const {Products} = require("../models");
 
@@ -12,6 +14,16 @@ router.get("/",async(req,res,next)=>{
         // using Products for now
         const products = await Products.find({});
         res.render("products/index",{products})
+    } catch (error) {
+        console.log(error);
+        res.send(error);
+    }
+})
+
+// seed route
+router.get("/seed",async(req,res,next)=>{
+    try {
+        await Products.insertMany(seededData);
     } catch (error) {
         console.log(error);
         res.send(error);
