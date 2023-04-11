@@ -46,4 +46,15 @@ router.post("/",async(req,res,next)=>{
     }
 })
 
+// edit (put) route - designed for testing for now
+router.post("/:id",async(req,res,next)=>{
+    try {
+        const updatedProd = await Products.findByIdAndUpdate(req.params.id,req.body);
+        await res.json(updatedProd);
+    } catch (error) {
+        console.log(error);
+        res.send(error);
+    }
+})
+
 module.exports = router;
