@@ -15,4 +15,14 @@ router.get("/",async(req,res,next)=>{
     }
 })
 
+// new route
+router.get("/new",async(req,res,next)=>{
+    try {
+        res.send(`Working! You are on the products' new page!`);
+    } catch (error) {
+        console.log(error);
+        res.send(error);
+    }
+})
+
 module.exports = router;
