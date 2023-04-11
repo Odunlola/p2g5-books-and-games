@@ -25,4 +25,15 @@ router.get("/new",async(req,res,next)=>{
     }
 })
 
+// new post route - designed for testing for now
+router.post("/",async(req,res,next)=>{
+    try {
+        const newProd = await Products.create(req.body);
+        res.json(newProd);
+    } catch (error) {
+        console.log(error);
+        res.send(error);
+    }
+})
+
 module.exports = router;
