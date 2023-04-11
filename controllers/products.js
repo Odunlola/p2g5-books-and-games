@@ -3,12 +3,15 @@ const express = require("express");
 const router = express.Router();
 
 // linking products model
-const {Products} = require("../models");
+const {Products, Products} = require("../models");
 
 // index route
 router.get("/",async(req,res,next)=>{
     try {
-        await res.send(`Working! You are on the products' index!`);
+        // await res.send(`Working! You are on the products' index!`);
+        // using Products for now
+        const products = await Products.find({});
+        res.render("products/index",{products})
     } catch (error) {
         console.log(error);
         res.send(error);
@@ -18,7 +21,8 @@ router.get("/",async(req,res,next)=>{
 // new route
 router.get("/new",async(req,res,next)=>{
     try {
-        await res.send(`Working! You are on the products' new page!`);
+        // await res.send(`Working! You are on the products' new page!`);
+        res.render("products/new");
     } catch (error) {
         console.log(error);
         res.send(error);
@@ -28,7 +32,9 @@ router.get("/new",async(req,res,next)=>{
 // show route
 router.get("/:id",async(req,res,next)=>{
     try {
-        await res.json(await Products.findById(req.params.id));
+        // await res.json(await Products.findById(req.params.id));
+        const product = await Products.findById(req.params.id);
+        res.render("products/show",{product});
     } catch (error) {
         console.log(error);
         res.send(error);
