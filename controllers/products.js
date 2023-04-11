@@ -47,10 +47,14 @@ router.post("/",async(req,res,next)=>{
 })
 
 // edit (put) route - designed for testing for now
-router.post("/:id",async(req,res,next)=>{
+router.put("/:id",async(req,res,next)=>{
     try {
         const updatedProd = await Products.findByIdAndUpdate(req.params.id,req.body);
-        await res.json(updatedProd);
+        // NOTE: the object does update, but it sends the json before the update, no idea why or on how to fix
+        // it'll probably be fixed by a redirect to a proper show page anyways
+        // wait i'm stupid
+        // await res.json(await updatedProd);
+        await res.redirect(`/products/${req.params.id}`)
     } catch (error) {
         console.log(error);
         res.send(error);
