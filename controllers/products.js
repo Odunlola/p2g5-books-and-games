@@ -2,7 +2,7 @@
 const express = require("express");
 const router = express.Router();
 
-// const seededData = require("../models/seededData");
+const seededData = require("../models/seededData");
 
 // linking products model
 const {Products} = require("../models");
