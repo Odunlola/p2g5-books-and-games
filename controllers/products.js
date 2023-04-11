@@ -5,15 +5,15 @@ const router = express.Router();
 const seededData = require("../models/seededData");
 
 // linking products model
-const {Products} = require("../models");
+const { Products } = require("../models");
 
 // index route
-router.get("/",async(req,res,next)=>{
+router.get("/", async (req, res, next) => {
     try {
         // await res.send(`Working! You are on the products' index!`);
         // using Products for now
         const products = await Products.find({});
-        res.render("products/index",{products})
+        res.render("products/index", { products })
     } catch (error) {
         console.log(error);
         res.send(error);
@@ -21,7 +21,7 @@ router.get("/",async(req,res,next)=>{
 })
 
 // seed route
-router.get("/seed",async(req,res,next)=>{
+router.get("/seed", async (req, res, next) => {
     try {
         await Products.deleteMany({});
         await Products.insertMany(seededData);
@@ -33,7 +33,7 @@ router.get("/seed",async(req,res,next)=>{
 })
 
 // new route
-router.get("/new",async(req,res,next)=>{
+router.get("/new", async (req, res, next) => {
     try {
         // await res.send(`Working! You are on the products' new page!`);
         res.render("products/new");
@@ -44,11 +44,11 @@ router.get("/new",async(req,res,next)=>{
 })
 
 // show route
-router.get("/:id",async(req,res,next)=>{
+router.get("/:id", async (req, res, next) => {
     try {
         // await res.json(await Products.findById(req.params.id));
         const product = await Products.findById(req.params.id);
-        res.render("products/show",{product});
+        res.render("products/show", { product });
     } catch (error) {
         console.log(error);
         res.send(error);
@@ -56,11 +56,11 @@ router.get("/:id",async(req,res,next)=>{
 })
 
 // delete confirmation route
-router.get("/:id/delete",async(req,res,next)=>{
+router.get("/:id/delete", async (req, res, next) => {
     try {
         // await res.json(await Products.findById(req.params.id));
         const product = await Products.findById(req.params.id);
-        res.render("products/delete",{product});
+        res.render("products/delete", { product });
     } catch (error) {
         console.log(error);
         res.send(error);
@@ -68,7 +68,7 @@ router.get("/:id/delete",async(req,res,next)=>{
 })
 
 // new post route - designed for testing for now
-router.post("/",async(req,res,next)=>{
+router.post("/", async (req, res, next) => {
     try {
         const newProd = await Products.create(req.body);
         await res.json(newProd);
@@ -79,9 +79,9 @@ router.post("/",async(req,res,next)=>{
 })
 
 // edit (put) route - designed for testing for now
-router.put("/:id",async(req,res,next)=>{
+router.put("/:id", async (req, res, next) => {
     try {
-        const updatedProd = await Products.findByIdAndUpdate(req.params.id,req.body);
+        const updatedProd = await Products.findByIdAndUpdate(req.params.id, req.body);
         // NOTE: the object does update, but it sends the json before the update, no idea why or on how to fix
         // it'll probably be fixed by a redirect to a proper show page anyways
         // wait i'm stupid
@@ -94,7 +94,7 @@ router.put("/:id",async(req,res,next)=>{
 })
 
 // delete route - one at a time
-router.delete("/:id",async(req,res,next)=>{
+router.delete("/:id", async (req, res, next) => {
     try {
         Products.findByIdAndDelete(req.params.id);
         res.redirect("/products");
