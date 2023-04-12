@@ -55,6 +55,18 @@ router.get("/:id", async (req, res, next) => {
     }
 })
 
+// get edit page route
+router.get("/:id/edit", async (req, res, next) => {
+    try {
+        // await res.json(await Products.findById(req.params.id));
+        const productToBeEdited = await Products.findById(req.params.id);
+        res.render("products/edit", { productToBeEdited });
+    } catch (error) {
+        console.log(error);
+        res.send(error);
+    }
+})
+
 // delete confirmation route
 router.get("/:id/delete", async (req, res, next) => {
     try {
