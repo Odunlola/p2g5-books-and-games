@@ -59,7 +59,7 @@ router.get("/:id", async (req, res, next) => {
 router.get("/:id/edit", async (req, res, next) => {
     try {
         // await res.json(await Products.findById(req.params.id));
-        const productToBeEdited = await Products.findById(req.params.id);
+        const product = await Products.findById(req.params.id);
         res.render("products/edit", { product });
     } catch (error) {
         console.log(error);
