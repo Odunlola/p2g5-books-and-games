@@ -32,9 +32,9 @@ The App is connected to MongoDB database and all changes made within the app wil
 
 Screenshots/ wireframe of pages: https://app.uizard.io/prototypes/pbdye6WjBmcJ95EwWLEY\
 
-![Home Page and Index Page (https://i.imgur.com/ZfshtTL.png)]
-![Show Pages (https://i.imgur.com/hdhgcVk.png)]
-![Product Type Paages (https://i.imgur.com/AkyStX1.png)]
+![Home Page and Index Page](https://i.imgur.com/ZfshtTL.png)
+![Show Pages](https://i.imgur.com/hdhgcVk.png)
+![Product Type Paages](https://i.imgur.com/AkyStX1.png)
 
 Technologies used:
 HTML
