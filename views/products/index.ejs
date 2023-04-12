@@ -8,7 +8,7 @@
         <!-- add main element -->
          <main>
         <% for(let i = 0; i < products.length; i++) { %>
-            <a href="/products/<%= i %>">
+            <a href="/products/<%=products[i]._id %>">
                 <img src=<%= products[i].image %> alt="product image">
                 </a>
         <h2> <%= products[i].name %></h2>
@@ -22,4 +22,4 @@
  
     
     </body>
-</html>
+</html>node 

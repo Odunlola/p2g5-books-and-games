@@ -3,11 +3,13 @@
     <%- include("../partials/head.ejs") %>
     <body>
         <%- include("../partials/header.ejs") %>
-        <!-- add main element -->
-         <main>
 
-         </main>
- 
-    
+        <h1>Are you sure you really want to delete <%= product.title %>?</h1>
+        <form method="POST" action="/products/<%= product._id %>?_method=DELETE">
+            <input type="submit" value="Go Ahead, Delete!">
+        </form>
+        <a href="/products/<%= product._id %>">
+            <button>Cancel</button>
+        </a>
     </body>
 </html>

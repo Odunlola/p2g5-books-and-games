@@ -30,7 +30,11 @@ New Page - To add new products to existing products
 The App is connected to MongoDB database and all changes made within the app will be concurrently reflect in database. Ensuring that the database is up-to-date with current stock/products available.
 
 
-Screenshots/ wireframe of pages: https://app.uizard.io/prototypes/pbdye6WjBmcJ95EwWLEY
+Screenshots/ wireframe of pages: https://app.uizard.io/prototypes/pbdye6WjBmcJ95EwWLEY\
+
+![Home Page and Index Page (https://i.imgur.com/ZfshtTL.png)]
+![Show Pages (https://i.imgur.com/hdhgcVk.png)]
+![Product Type Paages (https://i.imgur.com/AkyStX1.png)]
 
 Technologies used:
 HTML
