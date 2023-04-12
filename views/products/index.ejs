@@ -3,10 +3,22 @@
     <%- include("../partials/head.ejs") %>
     <body>
         <%- include("../partials/header.ejs") %>
+
+       
         <!-- add main element -->
          <main>
+        <% for(let i = 0; i < products.length; i++) { %>
+            <a href="/products/<%= i %>">
+                <img src=<%= products[i].image %> alt="product image">
+                </a>
+        <h2> <%= products[i].name %></h2>
+        <h3> <%= products[i].author %></h3>
+        <h3><%= products[i].productType %></h3>
+        <h1>$<%= products[i].price %></h1>
 
-         </main>
+        <hr>
+        <% } %>    
+
  
     
     </body>
