@@ -5,8 +5,22 @@
         <%- include("../partials/header.ejs") %>
         <!-- add main element -->
          <main>
+            <img src=<%= product.image %> alt="product image">
+            <td>
+            <h2> <%= product[i].name %></h2>
+            <h3> <%= product[i].author %></h3>
+            <h3><%= product[i].productType %></h3>
+            <h1>$<%= product[i].price %></h1>
 
+            <a href="/budget"><button style="background-color: black; color: white">EDIT</button> </a>
+            <a href="/budget"><button style="background-color: black; color: white">DELETE</button> </a>
+            <a href="/budget"><button style="background-color: black; color: white">ADD NEW</button> </a>
+           </td>
          </main>
+
+         <footer> Get 15%v off your nejxt order
+            <p>Subscribe to our Newsletter</p>
+         </footer>
  
     
     </body>
