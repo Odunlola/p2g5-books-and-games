@@ -2,11 +2,27 @@
 <html lang="en">
     <%- include("../partials/head.ejs") %>
     <body>
-        <%- include("../partials/header.ejs") %>
-        <!-- add main element -->
-         <main>
-
-         </main>
+     <%- include("../partials/header.ejs") %>
+       
+        <h1> Add New Product </h1>
+        <form action="/products" method="POST">
+            <label for="name">Name:</label>
+            <input type="text" name="name" id="name">
+            <br>
+            <label for="author">Author:</label>
+            <input type="text" name="author" id="author">
+            <br>
+            <label for="productType">Product Type:</label>
+            <input type="text" name="productType" id="productType">
+            <br>
+            <label for="price">Price:</label>
+            <input type="text" name="price" id="price">
+            <br>
+            <label for="image">Image URL: </label>
+            <input type="text" name="image" id="image">
+            <br>
+            <input type="submit" value="Add New Product">
+        </form>
  
     
     </body>
