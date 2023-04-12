@@ -4,9 +4,29 @@
     <body>
         <%- include("../partials/header.ejs") %>
         <!-- add main element -->
-         <main>
 
-         </main>
+            <h1> Add New Product</h1>
+            <form method="POST" action="/products/<%= idx %>?_method=PUT">
+                <label for="name">Name:</label>
+                <input type="text" name="name" id="name" value=<%= productToBeEdited.name %>>
+                <br>
+                <label for="author">author:</label>
+                <input type="text" name="author" id="author"  value=<%= productToBeEdited.author %>>
+                <br>
+                <label for="productType">Product Type </label>
+                <input type="text" name="productType" id="productType"  value=<%= productToBeEdited.productType %>>
+                <br>
+                <label for="price">author:</label>
+                <input type="text" name="price" id="price"  value=<%= productToBeEdited.price %>>
+                <br>
+                <label for="image">Image URL: </label>
+                <input type="text" name="image" id="image"  value=<%= productToBeEdited.image %>>
+                <br>
+                <input type="submit" value="SUBMIT">
+            </form>
+        
+
+
  
     
     </body>
