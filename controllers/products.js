@@ -15,7 +15,7 @@ router.get("/", async (req, res, next) => {
             products = await Products.find({});
         } else {
             let type = req.query.type;
-            type = type[0].toUpperCase()+type.slice(1,type.length-1);
+            type = type[0].toUpperCase()+type.slice(1,type.length);
             // type = type.charAt(0).toUpperCase()+type.slice(1);
             // console.log(type);
             products = await Products.find({productType:type});
