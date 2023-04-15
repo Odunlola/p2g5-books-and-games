@@ -10,9 +10,16 @@ const { Products } = require("../models");
 // index route
 router.get("/", async (req, res, next) => {
     try {
-        // await res.send(`Working! You are on the products' index!`);
-        // using Products for now
-        const products = await Products.find({});
+        let products;
+        if (req.query.type == ""){
+            products = await Products.find({});
+        } else {
+            let type = req.query.type;
+            type = type[0].toUpperCase()+type.slice(1,type.length-1);
+            // type = type.charAt(0).toUpperCase()+type.slice(1);
+            // console.log(type);
+            products = await Products.find({productType:type});
+        }
         res.render("products/index", { products })
     } catch (error) {
         console.log(error);
