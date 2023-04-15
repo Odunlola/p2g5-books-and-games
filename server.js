@@ -8,6 +8,8 @@ const PORT = process.env.PORT;
 const { Products } = require("./models");
 // setting up controller
 const productController = require("./controllers/products")
+const apiHome = require("./controllers/api/api");
+const productsApi = require("./controllers/api/products");
 
 //middleware
 app.set("view engine", "ejs");
@@ -30,6 +32,10 @@ app.get("/", async (req, res, next) => {
         res.send(error);
     }
 })
+
+// api routes
+app.use("/api/",apiHome);
+app.use("/api/products",productsApi);
 
 app.use("/products", productController);
 // Controller Router
