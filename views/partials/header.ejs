@@ -17,9 +17,21 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/products/new">New</a>    
                 </li>
-    
             </ul>
-            <i class="fa fa-search icon"></i>
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" role="button" href="#">Games</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/games" class="dropdown-item">Games that are probably cool</a></li>
+                            <li><a href="/games/new" class="dropdown-item">Add another game</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <button class="btn btn-outline-success" type="submit"><i class="fa fa-search icon"></i></button>
+            </form>
+            
             <i class='fa fa-shopping-cart red-color'></i>
         </div>
     </nav>
