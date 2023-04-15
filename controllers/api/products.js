@@ -2,10 +2,10 @@
 const express = require("express");
 const router = express.Router();
 
-const seededData = require("../models/seededData");
+const seededData = require("../../models/seededData");
 
 // linking products model
-const { Products } = require("../models");
+const { Products } = require("../../models");
 
 // index api
 router.get("/", async (req, res, next) => {
@@ -14,7 +14,7 @@ router.get("/", async (req, res, next) => {
         res.json({products,status:res.statusCode});
     } catch (error) {
         console.log(error);
-        res.send(error);
+        res.json({status:res.statusCode,error});
     }
 });
 
