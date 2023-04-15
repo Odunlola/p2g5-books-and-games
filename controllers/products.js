@@ -83,7 +83,8 @@ router.get("/:id/delete", async (req, res, next) => {
 router.post("/", async (req, res, next) => {
     try {
         const newProd = await Products.create(req.body);
-        await res.json(newProd);
+        // await res.json(newProd);
+        res.redirect(`/products/${newProd._id}`)
     } catch (error) {
         console.log(error);
         res.send(error);
@@ -108,7 +109,7 @@ router.put("/:id", async (req, res, next) => {
 // delete route - one at a time
 router.delete("/:id", async (req, res, next) => {
     try {
-        Products.findByIdAndDelete(req.params.id);
+        await Products.findByIdAndDelete(req.params.id);
         res.redirect("/products");
     } catch (error) {
         console.log(error);
