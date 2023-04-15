@@ -108,7 +108,7 @@ router.put("/:id", async (req, res, next) => {
 // delete route - one at a time
 router.delete("/:id", async (req, res, next) => {
     try {
-        Products.findByIdAndDelete(req.params.id);
+        await Products.findByIdAndDelete(req.params.id);
         res.redirect("/products");
     } catch (error) {
         console.log(error);
