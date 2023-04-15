@@ -11,7 +11,7 @@ const { Products } = require("../models");
 router.get("/", async (req, res, next) => {
     try {
         let products;
-        if (req.query.type == ""){
+        if ((typeof req.query.type === "undefined")||(req.query.type==="")){
             products = await Products.find({});
         } else {
             let type = req.query.type;
