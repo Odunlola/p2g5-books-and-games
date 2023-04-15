@@ -83,7 +83,8 @@ router.get("/:id/delete", async (req, res, next) => {
 router.post("/", async (req, res, next) => {
     try {
         const newProd = await Products.create(req.body);
-        await res.json(newProd);
+        // await res.json(newProd);
+        res.redirect(`/products/${newProd._id}`)
     } catch (error) {
         console.log(error);
         res.send(error);
