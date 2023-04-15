@@ -6,7 +6,7 @@
 
        
         <!-- add main element -->
-         <main>
+         <main class="container-lg">
         <% for(let i = 0; i < products.length; i++) { %>
             <a href="/products/<%=products[i]._id %>">
                 <img src=<%= products[i].image %> alt="product image">
@@ -20,6 +20,6 @@
         <% } %>    
 
  
-    
+         </main>
     </body>
 </html>node 
