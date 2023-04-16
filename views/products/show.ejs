@@ -3,33 +3,34 @@
     <%- include("../partials/head.ejs") %>
     <body>
         <%- include("../partials/header.ejs") %>
-        <!-- add main element -->
-         <table>
+      <main class="container-lg">
 
-         <th>
-            <img src=<%= product.image %> alt="product image">
-        </th>
-         <th>
-            <h2> <%= product.name %></h2>
-            <h3> <%= product.author %></h3>
-            <h3><%= product.productType %></h3>
-            <h1>$<%= product.price %></h1>
-
-            <a href="/products/<%= product._id %>/edit"><button style="background-color: black; color: white">EDIT</button> </a>
-         </br>
-            <a href="/products/<%= product._id %>/delete"><button style="background-color: black; color: white">DELETE</button> </a>
-         </br>
-            <a href="/products/new"><button style="background-color: black; color: white">ADD NEW</button> </a>
-           </th>
-        </table>
-
-         <footer> Get 15% off your next order
-            </br>
-           Subscribe to our Newsletter
-         </footer>
-
-
+         <!-- add main element -->
+          <table>
  
+          <th>
+             <img src=<%= product.image %> alt="product image">
+         </th>
+          <th>
+             <h2>Name:<%= product.name %></h2>
+             <h3>Author: <%= product.author %></h3>
+             <h3>Type:<%= product.productType %></h3>
+             <h1>$<%= product.price %></h1>
+ 
+             <a href="/products/<%= product._id %>/edit"><button style="background-color: black; color: white">EDIT</button> </a>
+          </br>
+             <a href="/products/<%= product._id %>/delete"><button style="background-color: black; color: white">DELETE</button> </a>
+          </br>
+             <a href="/products/new"><button style="background-color: black; color: white">ADD NEW</button> </a>
+            </th>
+         </table>
+ 
+          <footer> Get 15% off your next order
+             </br>
+            Subscribe to our Newsletter
+          </footer>
+ 
+      </main>
     
     </body>
 </html>
