@@ -11,9 +11,9 @@
             <a href="/products/<%=products[i]._id %>">
                 <img src=<%= products[i].image %> alt="product image">
                 </a>
-        <h2> <%= products[i].name %></h2>
-        <h3> <%= products[i].author %></h3>
-        <h3><%= products[i].productType %></h3>
+        <h2>Name: <%= products[i].name %></h2>
+        <h3>Author: <%= products[i].author %></h3>
+        <h3>Type:<%= products[i].productType %></h3>
         <h1>$<%= products[i].price %></h1>
 
         <hr>

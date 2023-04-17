@@ -3,3 +3,21 @@ nav{
     font-family: 'Inter', sans-serif;font-size: 35;font-weight:normal; color:#030303
 }
 
+body {
+    background-color: lightyellow;
+}
+
+img {
+    height: 250px;
+}
+
+.nav-link {
+    color: rgb (72,72,72);
+    transition: color 0.5s ease;
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+.nav-link:hover{
+    color:blue;
+}
