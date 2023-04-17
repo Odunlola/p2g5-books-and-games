@@ -21,3 +21,6 @@ img {
 .nav-link:hover{
     color:blue;
 }
+.home {
+    height: 75vh;
+}
