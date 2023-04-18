@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("../partials/head.ejs") %>
+    <body>
+        <%- include("../partials/header.ejs") %>
+
+        <div class="container-lg">
+            <h1> Edit Product <%= product.name %> </h1>
+            <form method="POST" action="/products/<%= product._id  %>?_method=PUT">
+                <div class="mb-3">
+                    <label for="name">Name:</label>
+                    <input type="text" name="name" id="name" value=<%= product.name %>>
+                </div>
+                <div class="mb-3">
+                    <label for="author">author:</label>
+                    <input type="text" name="author" id="author"  value=<%= product.author %>>
+                </div>
+                <div class="mb-3">
+                    <label for="productType">Product Type:</label>
+                    <input type="text" name="productType" id="productType"  value=<%= product.productType %>>
+                </div>
+                <div class="mb-3">
+                    <label for="price">Price:</label>
+                    <input type="text" name="price" id="price"  value=<%= product.price %>>
+                </div>
+                <div class="mb-3">
+                    <label for="image">Image URL: </label>
+                    <input type="text" name="image" id="image"  value=<%= product.image %>>
+                </div>
+                <input type="submit" value="Edit <% product.name %>">
+            </form>
+        
+        </div>
+    </body>
+</html>
