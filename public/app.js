@@ -6,3 +6,6 @@ const searchArea = document.querySelector("#navbarScroll ul");
 
 const searchInput = searchArea.querySelector("input");
 // console.log(searchInput);
+
+const typeFilter = searchArea.querySelector("select");
+// console.log(typeFilter);
