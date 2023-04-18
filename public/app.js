@@ -13,16 +13,18 @@ const typeFilter = searchArea.querySelector("select");
 const searchButton = searchArea.querySelector("a");
 // console.log(searchButton);
 
-searchButton.addEventListener("click",()=>{
-    // console.log(searchInput.value, typeFilter.value);
-    console.log(searchButton.href)
-})
+// searchButton.addEventListener("click",()=>{
+//     // console.log(searchInput.value, typeFilter.value);
+//     // console.log(searchButton.href)
+// })
 // ^works
 
 searchInput.addEventListener("keydown",(e)=>{
     // console.log(searchInput.value,typeFilter)
     if (typeFilter.value=="All categories") {
         searchButton.href = `/products?s=${searchInput.value}`
+    } else {
+        searchButton.href=`/products?type=${typeFilter.value}&s=${searchInput.value}`;
     }
 })
 
