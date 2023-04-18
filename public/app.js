@@ -13,14 +13,15 @@ const typeFilter = searchArea.querySelector("select");
 const searchButton = searchArea.querySelector("a");
 // console.log(searchButton);
 
-// searchButton.addEventListener("click",()=>{
-//     console.log(searchInput.value, typeFilter.value);
-// })
+searchButton.addEventListener("click",()=>{
+    // console.log(searchInput.value, typeFilter.value);
+    console.log(searchButton.href)
+})
 // ^works
 
 searchInput.addEventListener("keydown",(e)=>{
     // console.log(searchInput.value,typeFilter)
-    if (typeFilter=="All categories") {
+    if (typeFilter.value=="All categories") {
         searchButton.href = `/products?s=${searchInput.value}`
     }
 })
