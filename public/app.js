@@ -19,12 +19,28 @@ const searchButton = searchArea.querySelector("a");
 // })
 // ^works
 
+searchButton.addEventListener("mouseover",()=>{
+    if (typeFilter.value=="All categories") {
+        searchButton.href = `/products?s=${searchInput.value}`
+    } else {
+        searchButton.href=`/products?type=${typeFilter.value}&s=${searchInput.value}`;
+    }
+})
+
 searchInput.addEventListener("keydown",(e)=>{
     // console.log(searchInput.value,typeFilter)
     if (typeFilter.value=="All categories") {
         searchButton.href = `/products?s=${searchInput.value}`
     } else {
         searchButton.href=`/products?type=${typeFilter.value}&s=${searchInput.value}`;
+    }
+
+    if (e.key === "Enter"){
+        if (typeFilter.value=="All categories") {
+            location.replace(`/products?s=${searchInput.value}`)
+        } else {
+            location.replace(`/products?type=${typeFilter.value}&s=${searchInput.value}`);
+        }
     }
 })
 
