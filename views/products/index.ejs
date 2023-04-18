@@ -2,19 +2,24 @@
 <html lang="en">
     <%- include("../partials/head.ejs") %>
     <body>
+        <!-- change background image depends on {type} -->
         <%- include("../partials/header.ejs") %>
+        <% if (type === "Book") { %>
+            <body style="background-image: url('/images/book3.jpeg'); background-size: 55vh; color:orangered;">
+        <% }  else if (type === "Game") { %>
+            <body style="background-image: url('/images/game2.png'); background-size: cover; color:whitesmoke;"></body>
+        <% } %>
 
-       
         <!-- add main element -->
          <main class="container-lg">
         <% for(let i = 0; i < products.length; i++) { %>
             <a href="/products/<%=products[i]._id %>">
                 <img src=<%= products[i].image %> alt="product image">
                 </a>
-        <h2>Name: <%= products[i].name %></h2>
-        <h3>Author: <%= products[i].author %></h3>
-        <h3>Type:<%= products[i].productType %></h3>
-        <h1>$<%= products[i].price %></h1>
+        <h1><%= products[i].name %></h1>
+        <h3>By <%= products[i].author %></h3>
+        <h6><%= products[i].productType %></h6>
+        <h3>$<%= products[i].price %></h3>
 
         <hr>
         <% } %>    
