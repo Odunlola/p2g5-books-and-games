@@ -10,5 +10,15 @@ const searchInput = searchArea.querySelector("input");
 const typeFilter = searchArea.querySelector("select");
 // console.log(typeFilter);
 
-const searchButton = searchArea.querySelector("button");
-// console.log(searchButton);
+const searchButton = searchArea.querySelector("a");
+console.log(searchButton);
+
+// searchButton.addEventListener("click",()=>{
+//     console.log(typeFilter.value);
+// })
+// ^works
+
+searchInput.addEventListener("keydown",(e)=>{
+    searchButton.href
+})
+
