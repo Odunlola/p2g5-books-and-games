@@ -12,10 +12,10 @@
              <img src=<%= product.image %> alt="product image">
          </th>
           <th>
-             <h2>Name:<%= product.name %></h2>
-             <h3>Author: <%= product.author %></h3>
-             <h3>Type:<%= product.productType %></h3>
-             <h1>$<%= product.price %></h1>
+             <h1><%= product.name %></h1>
+             <h3>By <%= product.author %></h3>
+             <h6><%= product.productType %></h6>
+             <h3>$<%= product.price %></h3>
  
              <a href="/products/<%= product._id %>/edit"><button style="background-color: black; color: white">EDIT</button> </a>
           </br>
