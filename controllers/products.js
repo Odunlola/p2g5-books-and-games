@@ -13,16 +13,23 @@ router.get("/", async (req, res, next) => {
         let products;
         let type = "";
         let searchQuery = req.query.s;
-        if ((typeof req.query.type === "undefined")||(req.query.type==="")){
-            products = await Products.find({name:{$regex: new RegExp(searchQuery,"i")}});
+        if ((typeof req.query.type === "undefined") || (req.query.type === "")) {
+            // searching thru all the products with a title that contains the series of searchQuery
+            // if sQ is empty, products should return everything
+            products = await Products.find({ name: { $regex: new RegExp(searchQuery, "i") } });
         } else {
+            // getting and formatting type
             type = req.query.type;
-            type = type[0].toUpperCase()+type.slice(1,type.length);
+            type = type[0].toUpperCase() + type.slice(1, type.length);
             // type = type.charAt(0).toUpperCase()+type.slice(1);
             // console.log(type);
-            products = await Products.find({productType:type,name:{$regex: new RegExp(searchQuery,"i")}});
+
+            // searching thru all the products with a title that contains the series of searchQuery
+            // and a matching type
+            // if sQ is empty, products should return everything w/ matching type
+            products = await Products.find({ productType: type, name: { $regex: new RegExp(searchQuery, "i") } });
         }
-        res.render("products/index", { products,type })
+        res.render("products/index", { products, type })
     } catch (error) {
         console.log(error);
         res.send(error);
@@ -104,10 +111,6 @@ router.post("/", async (req, res, next) => {
 router.put("/:id", async (req, res, next) => {
     try {
         const updatedProd = await Products.findByIdAndUpdate(req.params.id, req.body);
-        // NOTE: the object does update, but it sends the json before the update, no idea why or on how to fix
-        // it'll probably be fixed by a redirect to a proper show page anyways
-        // wait i'm stupid
-        // await res.json(await updatedProd);
         await res.redirect(`/products/${req.params.id}`)
     } catch (error) {
         console.log(error);
