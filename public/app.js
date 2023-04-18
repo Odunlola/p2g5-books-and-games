@@ -9,3 +9,6 @@ const searchInput = searchArea.querySelector("input");
 
 const typeFilter = searchArea.querySelector("select");
 // console.log(typeFilter);
+
+const searchButton = searchArea.querySelector("button");
+// console.log(searchButton);
