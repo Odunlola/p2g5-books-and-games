@@ -12,14 +12,15 @@ router.get("/", async (req, res, next) => {
     try {
         let products;
         let type = "";
+        let searchQuery = req.query.s;
         if ((typeof req.query.type === "undefined")||(req.query.type==="")){
-            products = await Products.find({});
+            products = await Products.find({name:{$regex: new RegExp(searchQuery,"i")}});
         } else {
             type = req.query.type;
             type = type[0].toUpperCase()+type.slice(1,type.length);
             // type = type.charAt(0).toUpperCase()+type.slice(1);
             // console.log(type);
-            products = await Products.find({productType:type});
+            products = await Products.find({productType:type,name:{$regex: new RegExp(searchQuery,"i")}});
         }
         res.render("products/index", { products,type })
     } catch (error) {
