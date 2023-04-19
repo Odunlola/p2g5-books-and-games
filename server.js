@@ -26,7 +26,7 @@ app.use(session({
         mongoUrl:process.env.MONGO_DB_URI,
     }),
     // secret signature
-    secret:process.env.secret,
+    secret:process.env.SECRET,
     // no resaving same sesh or saving uninitted sesh
     resave:false,
     saveUninitialized:false,
@@ -67,3 +67,4 @@ app.use("/products", productController);
 app.listen(PORT, ()=>{
     console.log(`Now listening on port ${PORT} Ω🔌 🔌Ω`);
 });
+
