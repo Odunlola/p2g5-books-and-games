@@ -21,6 +21,31 @@ router.get("/signup",(req,res,next)=>{
     }
 })
 
+router.post("/login",async(req,res,next)=>{
+    try {
+        let user;
+        const userExists=await Users.exists({email:req.body.email});
+        if(!userExists){
+            res.redirect("/login?error=true");
+            return 0;
+        }
+        user = await Users.findOne({email:req.body.email});
+        const match = await bcrypt.compare(req.body.password,user.password);
+        if(match){
+            req.session.currentUser={
+                id:user._id,
+                username:user.username,
+            }
+            res.redirect("/products");
+        } else {
+            res.redirect("/login?error=true");
+        }
+    } catch (error) {
+        console.log(error);
+        res.send(error);
+    }
+})
+
 router.post("/signup",async(req,res,next)=>{
     try {
         const newUser = req.body;
@@ -34,6 +59,11 @@ router.post("/signup",async(req,res,next)=>{
         console.log(error);
         res.send(error);
     }
+})
+
+router.get("/logout",async(req,res,next)=>{
+    req.session.destroy();
+    res.redirect("/login")
 })
 
 module.exports=router
