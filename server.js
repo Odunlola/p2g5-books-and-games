@@ -4,14 +4,16 @@ const express = require("express");
 const app = express();
 const methodOverride = require("method-override");
 const mongoose = require("mongoose");
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 4000;
+const session = require("express-session");
+const MongoStore = require("connect-mongo");
+
 const { Products } = require("./models");
 // setting up controller
 const productController = require("./controllers/products")
 const apiHome = require("./controllers/api/api");
 const productsApi = require("./controllers/api/products");
-const session = require("express-session");
-const MongoStore = require("connect-mongo");
+const userController = require("./controllers/users");
 
 //middleware
 app.set("view engine", "ejs");
@@ -24,7 +26,7 @@ app.use(session({
         mongoUrl:process.env.MONGO_DB_URI,
     }),
     // secret signature
-    secret:process.env.secret,
+    secret:process.env.SECRET,
     // no resaving same sesh or saving uninitted sesh
     resave:false,
     saveUninitialized:false,
@@ -53,8 +55,10 @@ app.get("/", async (req, res, next) => {
 })
 
 // api routes
-app.use("/api/",apiHome);
+app.use("/api",apiHome);
 app.use("/api/products",productsApi);
+
+app.use("",userController);
 
 app.use("/products", productController);
 // Controller Router
@@ -63,3 +67,4 @@ app.use("/products", productController);
 app.listen(PORT, ()=>{
     console.log(`Now listening on port ${PORT} Ω🔌 🔌Ω`);
 });
+
