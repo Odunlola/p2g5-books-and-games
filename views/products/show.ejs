@@ -16,7 +16,7 @@
              <h3>By <%= product.author %></h3>
              <h6><%= product.productType %></h6>
              <h3>$<%= product.price %></h3>
-             <% if(usersBook) { %>
+             <% if(usersProducts) { %>
              <a href="/products/<%= product._id %>/edit"><button style="background-color: black; color: white">EDIT</button> </a>
           </br>
              <a href="/products/<%= product._id %>/delete"><button style="background-color: black; color: white">DELETE</button> </a>
@@ -24,7 +24,7 @@
              <a href="/products/new"><button style="background-color: black; color: white">ADD NEW</button> </a>
             </th>
             <% } %>
-    <form method="POST" action="/books/<%= product._id %>/comments">
+    <form method="POST" action="/products/<%= product._id %>/comments">
         Rating: <input type="text" name="rating">
         Comment: <input type="text" name="text">
         <input type="submit" value="Submit this rating">
