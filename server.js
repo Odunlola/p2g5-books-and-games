@@ -10,11 +10,30 @@ const { Products } = require("./models");
 const productController = require("./controllers/products")
 const apiHome = require("./controllers/api/api");
 const productsApi = require("./controllers/api/products");
+const session = require("express-session");
+const MongoStore = require("connect-mongo");
 
 //middleware
 app.set("view engine", "ejs");
 app.use(express.urlencoded({extended:false}));
 app.use(express.static("public"));
+
+app.use(session({
+    // givng mongostore access to the db
+    store:MongoStore.create({
+        mongoUrl:process.env.MONGO_DB_URI,
+    }),
+    // secret signature
+    secret:process.env.secret,
+    // no resaving same sesh or saving uninitted sesh
+    resave:false,
+    saveUninitialized:false,
+    cookie:{
+        // 1 day * 24hrs * 60mins * 60secs * 1000ms
+        maxAge: 1000*60*60*24*1,
+    }
+}))
+
 app.use(methodOverride("_method"));
 
 //Routes
