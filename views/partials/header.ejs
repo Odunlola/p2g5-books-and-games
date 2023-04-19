@@ -42,4 +42,9 @@
             <i class='fa fa-shopping-cart red-color'></i>
         </div>
     </nav>
+    <div>
+        <% if(typeof username !== 'undefined') { %>
+            <h1>Welcome, <%= username %></h1>
+        <% } %>
+    </div>
   </header>
