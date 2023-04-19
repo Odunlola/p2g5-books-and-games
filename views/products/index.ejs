@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
     <%- include("../partials/head.ejs") %>
+    <% if(user) { %>
+        <h3>Hello, <%= user %></h3>
+    <% } %>
     <body>
         <!-- change background image depends on {type} -->
         <%- include("../partials/header.ejs") %>
