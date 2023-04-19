@@ -4,7 +4,7 @@ const express = require("express");
 const app = express();
 const methodOverride = require("method-override");
 const mongoose = require("mongoose");
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 4000;
 const { Products } = require("./models");
 // setting up controller
 const productController = require("./controllers/products")
