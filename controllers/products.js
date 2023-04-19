@@ -13,7 +13,7 @@ router.get("/", async (req, res, next) => {
         let products;
         let type = "";
         let searchQuery = req.query.s;
-        let user;
+        let username;
         if ((typeof req.query.type === "undefined") || (req.query.type === "")) {
             // searching thru all the products with a title that contains the series of searchQuery
             // if sQ is empty, products should return everything
@@ -31,11 +31,11 @@ router.get("/", async (req, res, next) => {
             products = await Products.find({ productType: type, name: { $regex: new RegExp(searchQuery, "i") } });
         }
         if (typeof req.session.currentUser !== "undefined") {
-            user = req.session.currentUser.username;
+            username = req.session.currentUser.username;
         } else{
-            user = "Guest";
+            username = "Guest";
         }
-        res.render("products/index", { products, type, user })
+        res.render("products/index", { products, type, username })
     } catch (error) {
         console.log(error);
         res.send(error);
