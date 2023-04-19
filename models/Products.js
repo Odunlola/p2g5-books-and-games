@@ -21,6 +21,10 @@ const productSchema = new mongoose.Schema(
         productType:{
             type:String,
             required:[true, "either Book for Game"]
+        },
+        user:{
+            type:mongoose.Schema.Types.ObjectId,
+            ref:"user"
         }
     },{
         timestamps:true
