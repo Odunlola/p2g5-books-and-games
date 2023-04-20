@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
     <%- include("../partials/head.ejs") %>
+<% if(user) { %>
+    <h3>Hello, <%= user %></h3>
+<% } %>
     <body>
         <!-- change background image depends on {type} -->
         <%- include("../partials/header.ejs") %>
-    <div>
-        <% if(typeof username !== 'undefined') { %>
-            <h1>Welcome, <%= username %></h1>
-        <% } %>
-    </div>
+
         <% if (type === "Book") { %>
             <body style="background-image: url('/images/book3.jpeg'); background-size: 55vh; color:orangered;">
         <% }  else if (type === "Game") { %>
@@ -16,7 +15,14 @@
         <% } %>
 
         <!-- add main element -->
+        
          <main class="container-lg">
+
+            <div>
+                <% if(typeof username !== 'undefined') { %>
+                    <h1>Welcome, <%= username %></h1>
+                <% } %>
+            </div>
         <% for(let i = 0; i < products.length; i++) { %>
             <a href="/products/<%=products[i]._id %>">
                 <img src=<%= products[i].image %> alt="product image">
