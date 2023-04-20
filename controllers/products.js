@@ -73,15 +73,6 @@ router.get("/:id", async (req, res, next) => {
         // await res.json(await Products.findById(req.params.id));
         const product = await Products.findById(req.params.id);
 
-        // logic for bool if currentUser owns this product or not
-        let usersProducts; //name for parity with views
-        // if user is logged in their user id is the same as the assoc. user id for this product...
-        if (typeof req.session.currentUser !=="undefined" && req.session.currentUser.id === product.user.toString()){
-            usersProducts=true;
-        }else {
-            usersProducts=false;
-        }
-
         // logic for getting and passing in comments
 
         let productComments = await Comments.find({product:req.params.id}); //name for parity with views
@@ -93,7 +84,7 @@ router.get("/:id", async (req, res, next) => {
             productCommentUsernames[i] = Products.findById(comment.user).username;
         }
 
-        res.render("products/show", { product,usersProducts,productComments,productCommentUsernames,user:checkCurrUser(req) });
+        res.render("products/show", { product,productComments,productCommentUsernames,user:checkCurrUser(req) });
     } catch (error) {
         console.log(error);
         res.send(error);
