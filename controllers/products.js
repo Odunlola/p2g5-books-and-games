@@ -7,6 +7,14 @@ const seededData = require("../models/seededData");
 // linking products model
 const { Products,Users, Comments } = require("../models");
 
+function checkCurrUser(req){
+    if (typeof req.session.currentUser !== "undefined") {
+        return req.session.currentUser.username;
+    } else{
+        return "Guest";
+    }
+}
+
 // index route
 router.get("/", async (req, res, next) => {
     try {
@@ -30,12 +38,7 @@ router.get("/", async (req, res, next) => {
             // if sQ is empty, products should return everything w/ matching type
             products = await Products.find({ productType: type, name: { $regex: new RegExp(searchQuery, "i") } });
         }
-        if (typeof req.session.currentUser !== "undefined") {
-            username = req.session.currentUser.username;
-        } else{
-            username = "Guest";
-        }
-        res.render("products/index", { products, type, username })
+        res.render("products/index", { products, type, username:checkCurrUser(req) })
     } catch (error) {
         console.log(error);
         res.send(error);
