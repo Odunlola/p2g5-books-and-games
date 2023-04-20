@@ -6,8 +6,17 @@ const bcrypt = require("bcrypt");
 router.get("/login", (req, res, next) => {
     try {
         let error;
-        if (req.query.error==true){
-            error = "Username or password didn't match";
+        switch (req.query.error) {
+            case "true":
+                error = "Username or password didn't match";
+                break;
+
+            case "privilege":
+                error = "You need to be logged in to do that."
+                break;
+        
+            default:
+                break;
         }
         res.render("users/login",{error});
     } catch (error) {
