@@ -1,10 +1,12 @@
 <%- include("../partials/head.ejs") %>
-<%- include("../partials/header.ejs") %>
 <h1>Login to your account</h1>
 <form method="POST" action="/login">
     <label for="email">Email:</label>
     <input type="text" name="email" id="email" placeholder="something@gmail.com">
     <label for="password">Password:</label>
     <input type="password" name="password" id="password">
-    <input type="submit" value="Create a new user">
+    <input type="submit" value="Login">
 </form>
+</br>
+<footer> <a href="/"><button style="background-color: black; color: white">Back to Home Page</button> </a>
+</footer>
