@@ -85,6 +85,7 @@ router.get("/:id", async (req, res, next) => {
         // logic for getting and passing in comments
 
         let productComments = await Comments.find({product:req.params.id}); //name for parity with views
+        console.log(productComments)
 
         let productCommentUsernames=[]; //parity
         for (let i = 0; i < productComments.length; i++) {
@@ -106,7 +107,7 @@ router.get("/:id/edit", async (req, res, next) => {
         if (typeof req.session.currentUser.id==="undefined"){
             res.redirect("/login?error=privilege");
             return 0;
-        }else if (req.session.currentUser.id!==product.user){
+        }else if (req.session.currentUser.id!==product.user.toString()){
             res.send(`<h1>It appears you can't do that.</h1>`)
             return 0;
         }else{
@@ -121,8 +122,14 @@ router.get("/:id/edit", async (req, res, next) => {
 // delete confirmation route
 router.get("/:id/delete", async (req, res, next) => {
     try {
-        // await res.json(await Products.findById(req.params.id));
         const product = await Products.findById(req.params.id);
+        if (typeof req.session.currentUser.id==="undefined"){
+            res.redirect("/login?error=privilege");
+            return 0;
+        }else if (req.session.currentUser.id!==product.user.toString()){
+            res.send(`<h1>It appears you can't do that.</h1>`)
+            return 0;
+        }
         res.render("products/delete", { product,user:checkCurrUser(req) });
     } catch (error) {
         console.log(error);
@@ -154,7 +161,7 @@ router.put("/:id", async (req, res, next) => {
         if (typeof req.session.currentUser.id==="undefined"){
             res.redirect("/login?error=privilege");
             return 0;
-        }else if (req.session.currentUser.id!==product.user){
+        }else if (req.session.currentUser.id!==product.user.toString()){
             res.send(`<h1>It appears you can't do that.</h1>`)
             return 0;
         }
@@ -173,12 +180,27 @@ router.delete("/:id", async (req, res, next) => {
         if (typeof req.session.currentUser.id==="undefined"){
             res.redirect("/login?error=privilege");
             return 0;
-        }else if (req.session.currentUser.id!==product.user){
+        }else if (req.session.currentUser.id!==product.user.toString()){
+            console.log(req.session.currentUser.id, product.user)
             res.send(`<h1>It appears you can't do that.</h1>`)
             return 0;
         }
         await Products.findByIdAndDelete(req.params.id);
         res.redirect("/products");
+    } catch (error) {
+        console.log(error);
+        res.send(error);
+    }
+})
+
+router.post("/:id/comments",async(req,res,next)=>{
+    try {
+        
+        let newComment = req.body;
+        newComment.user = req.session.currentUser.id;
+        newComment.product = req.params.id;
+        await Comments.create(newComment);
+        res.redirect(`/products/${req.params.id}`);
     } catch (error) {
         console.log(error);
         res.send(error);
