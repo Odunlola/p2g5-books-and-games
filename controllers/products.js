@@ -133,6 +133,9 @@ router.get("/:id/delete", async (req, res, next) => {
 // new post route 
 router.post("/", async (req, res, next) => {
     try {
+        if (!req.session.currentUser.id){
+            res.send(`We don't have a 404 page, so you'll have to settle with this.<h1>404</h1>`)
+        }
         let newProd = req.body;
         newProd.user = req.session.currentUser.id;
         newProd = await Products.create(newProd);
@@ -146,8 +149,12 @@ router.post("/", async (req, res, next) => {
 // edit (put) route - designed for testing for now
 router.put("/:id", async (req, res, next) => {
     try {
+        if (req.session.currentUser.id!==product.user){
+            res.send(`We don't have a 404 page, so you'll have to settle with this.<h1>404</h1>`)
+            return 0;
+        }
         const updatedProd = await Products.findByIdAndUpdate(req.params.id, req.body);
-        await res.redirect(`/products/${req.params.id}`)
+        res.redirect(`/products/${req.params.id}`)
     } catch (error) {
         console.log(error);
         res.send(error);
@@ -157,6 +164,10 @@ router.put("/:id", async (req, res, next) => {
 // delete route - one at a time
 router.delete("/:id", async (req, res, next) => {
     try {
+        if (req.session.currentUser.id!==product.user){
+            res.send(`We don't have a 404 page, so you'll have to settle with this.<h1>404</h1>`)
+            return 0;
+        }
         await Products.findByIdAndDelete(req.params.id);
         res.redirect("/products");
     } catch (error) {
