@@ -85,6 +85,7 @@ router.get("/:id", async (req, res, next) => {
         // logic for getting and passing in comments
 
         let productComments = await Comments.find({product:req.params.id}); //name for parity with views
+        console.log(productComments)
 
         let productCommentUsernames=[]; //parity
         for (let i = 0; i < productComments.length; i++) {
@@ -197,7 +198,7 @@ router.post("/:id/comments",async(req,res,next)=>{
         
         let newComment = req.body;
         newComment.user = req.session.currentUser.id;
-        newComment.book = req.params.id;
+        newComment.product = req.params.id;
         await Comments.create(newComment);
         res.redirect(`/products/${req.params.id}`);
     } catch (error) {
