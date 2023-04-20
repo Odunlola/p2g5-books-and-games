@@ -61,7 +61,7 @@ router.get("/seed", async (req, res, next) => {
 router.get("/new", async (req, res, next) => {
     try {
         // await res.send(`Working! You are on the products' new page!`);
-        res.render("products/new");
+        res.render("products/new",{username:checkCurrUser(req)});
     } catch (error) {
         console.log(error);
         res.send(error);
@@ -93,7 +93,7 @@ router.get("/:id", async (req, res, next) => {
             productCommentUsernames[i] = Products.findById(comment.user).username;
         }
 
-        res.render("products/show", { product,usersProducts,productComments,productCommentUsernames });
+        res.render("products/show", { product,usersProducts,productComments,productCommentUsernames,username:checkCurrUser(req) });
     } catch (error) {
         console.log(error);
         res.send(error);
@@ -105,7 +105,7 @@ router.get("/:id/edit", async (req, res, next) => {
     try {
         // await res.json(await Products.findById(req.params.id));
         const product = await Products.findById(req.params.id);
-        res.render("products/edit", { product });
+        res.render("products/edit", { product,username:checkCurrUser(req) });
     } catch (error) {
         console.log(error);
         res.send(error);
@@ -117,7 +117,7 @@ router.get("/:id/delete", async (req, res, next) => {
     try {
         // await res.json(await Products.findById(req.params.id));
         const product = await Products.findById(req.params.id);
-        res.render("products/delete", { product });
+        res.render("products/delete", { product,username:checkCurrUser(req) });
     } catch (error) {
         console.log(error);
         res.send(error);
