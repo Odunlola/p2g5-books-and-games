@@ -185,4 +185,18 @@ router.delete("/:id", async (req, res, next) => {
     }
 })
 
+router.post("/:id/comments",async(req,res,next)=>{
+    try {
+        
+        let newComment = req.body;
+        newComment.user = req.session.currentUser.id;
+        newComment.book = req.params.id;
+        await Comments.create(newComment);
+        res.redirect(`/products/${req.params.id}`);
+    } catch (error) {
+        console.log(error);
+        res.send(error);
+    }
+})
+
 module.exports = router;
