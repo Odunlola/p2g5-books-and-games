@@ -103,9 +103,16 @@ router.get("/:id", async (req, res, next) => {
 // get edit page route
 router.get("/:id/edit", async (req, res, next) => {
     try {
-        // await res.json(await Products.findById(req.params.id));
         const product = await Products.findById(req.params.id);
-        res.render("products/edit", { product,username:checkCurrUser(req) });
+        if (typeof req.session.currentUser.id==="undefined"){
+            res.redirect("/login?privilege");
+            return 0;
+        }else if (req.session.currentUser.id!==product.user){
+            res.send(`We don't have a 404 page, so you'll have to settle with this.<h1>404</h1>`)
+            return 0;
+        }else{
+            res.render("products/edit", { product,username:checkCurrUser(req) });
+        }
     } catch (error) {
         console.log(error);
         res.send(error);
