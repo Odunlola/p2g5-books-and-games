@@ -6,6 +6,7 @@ const seededData = require("../models/seededData");
 
 // linking products model
 const { Products,Users, Comments } = require("../models");
+const User = require("../models/Users");
 
 function checkCurrUser(req){
     if (typeof req.session.currentUser !== "undefined") {
@@ -76,12 +77,12 @@ router.get("/:id", async (req, res, next) => {
         // logic for getting and passing in comments
 
         let productComments = await Comments.find({product:req.params.id}); //name for parity with views
-        console.log(productComments)
 
         let productCommentUsernames=[]; //parity
         for (let i = 0; i < productComments.length; i++) {
             const comment = productComments[i];
-            productCommentUsernames[i] = Products.findById(comment.user).username;
+            const commenter = await Users.findById(comment.user);
+            productCommentUsernames[i] = (commenter.username);
         }
 
         res.render("products/show", { product,productComments,productCommentUsernames,user:checkCurrUser(req) });
