@@ -104,10 +104,10 @@ router.get("/:id/edit", async (req, res, next) => {
     try {
         const product = await Products.findById(req.params.id);
         if (typeof req.session.currentUser.id==="undefined"){
-            res.redirect("/login?privilege");
+            res.redirect("/login?error=privilege");
             return 0;
         }else if (req.session.currentUser.id!==product.user){
-            res.send(`We don't have a 404 page, so you'll have to settle with this.<h1>404</h1>`)
+            res.send(`<h1>It appears you can't do that.</h1>`)
             return 0;
         }else{
             res.render("products/edit", { product,user:checkCurrUser(req) });
@@ -133,8 +133,9 @@ router.get("/:id/delete", async (req, res, next) => {
 // new post route 
 router.post("/", async (req, res, next) => {
     try {
-        if (!req.session.currentUser.id){
-            res.send(`We don't have a 404 page, so you'll have to settle with this.<h1>404</h1>`)
+        if (typeof req.session.currentUser.id==="undefined"){
+            res.redirect("/login?error=privilege");
+            return 0;
         }
         let newProd = req.body;
         newProd.user = req.session.currentUser.id;
@@ -149,8 +150,12 @@ router.post("/", async (req, res, next) => {
 // edit (put) route - designed for testing for now
 router.put("/:id", async (req, res, next) => {
     try {
-        if (req.session.currentUser.id!==product.user){
-            res.send(`We don't have a 404 page, so you'll have to settle with this.<h1>404</h1>`)
+        const product = await Products.findById(req.params.id);
+        if (typeof req.session.currentUser.id==="undefined"){
+            res.redirect("/login?error=privilege");
+            return 0;
+        }else if (req.session.currentUser.id!==product.user){
+            res.send(`<h1>It appears you can't do that.</h1>`)
             return 0;
         }
         const updatedProd = await Products.findByIdAndUpdate(req.params.id, req.body);
@@ -164,8 +169,12 @@ router.put("/:id", async (req, res, next) => {
 // delete route - one at a time
 router.delete("/:id", async (req, res, next) => {
     try {
-        if (req.session.currentUser.id!==product.user){
-            res.send(`We don't have a 404 page, so you'll have to settle with this.<h1>404</h1>`)
+        const product = await Products.findById(req.params.id);
+        if (typeof req.session.currentUser.id==="undefined"){
+            res.redirect("/login?error=privilege");
+            return 0;
+        }else if (req.session.currentUser.id!==product.user){
+            res.send(`<h1>It appears you can't do that.</h1>`)
             return 0;
         }
         await Products.findByIdAndDelete(req.params.id);
