@@ -77,7 +77,7 @@ router.get("/:id", async (req, res, next) => {
         // logic for bool if currentUser owns this product or not
         let usersProducts; //name for parity with views
         // if user is logged in their user id is the same as the assoc. user id for this product...
-        if (typeof req.session.currentUser !=="undefined" && req.session.currentUser.id === product.user){
+        if (typeof req.session.currentUser !=="undefined" && req.session.currentUser.id === product.user.toString()){
             usersProducts=true;
         }else {
             usersProducts=false;
@@ -124,11 +124,12 @@ router.get("/:id/delete", async (req, res, next) => {
     }
 })
 
-// new post route - designed for testing for now
+// new post route 
 router.post("/", async (req, res, next) => {
     try {
-        const newProd = await Products.create(req.body);
-        // await res.json(newProd);
+        let newProd = req.body;
+        newProd.user = req.session.currentUser.id;
+        newProd = await Products.create(newProd);
         res.redirect(`/products/${newProd._id}`)
     } catch (error) {
         console.log(error);
