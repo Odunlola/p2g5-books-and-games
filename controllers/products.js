@@ -5,7 +5,7 @@ const router = express.Router();
 const seededData = require("../models/seededData");
 
 // linking products model
-const { Products } = require("../models");
+const { Products,Users, Comments } = require("../models");
 
 // index route
 router.get("/", async (req, res, next) => {
@@ -70,7 +70,21 @@ router.get("/:id", async (req, res, next) => {
     try {
         // await res.json(await Products.findById(req.params.id));
         const product = await Products.findById(req.params.id);
-        res.render("products/show", { product });
+
+        // logic for bool if currentUser owns this product or not
+        let usersProducts; //name for parity with views
+        // if user is logged in their user id is the same as the assoc. user id for this product...
+        if (typeof req.session.currentUser !=="undefined" && req.session.currentUser.id === product.user){
+            usersProducts=true;
+        }else {
+            usersProducts=false;
+        }
+
+        // logic for getting and passing in comments
+
+        let productComments = await Comments.find({product:req.params.id}); //name for parity with views
+
+        res.render("products/show", { product,usersProducts,productComments });
     } catch (error) {
         console.log(error);
         res.send(error);
