@@ -21,7 +21,6 @@ router.get("/", async (req, res, next) => {
         let products;
         let type = "";
         let searchQuery = req.query.s;
-        let username;
         if ((typeof req.query.type === "undefined") || (req.query.type === "")) {
             // searching thru all the products with a title that contains the series of searchQuery
             // if sQ is empty, products should return everything
@@ -38,7 +37,7 @@ router.get("/", async (req, res, next) => {
             // if sQ is empty, products should return everything w/ matching type
             products = await Products.find({ productType: type, name: { $regex: new RegExp(searchQuery, "i") } });
         }
-        res.render("products/index", { products, type, username:checkCurrUser(req) })
+        res.render("products/index", { products, type, user:checkCurrUser(req) })
     } catch (error) {
         console.log(error);
         res.send(error);
@@ -61,7 +60,7 @@ router.get("/seed", async (req, res, next) => {
 router.get("/new", async (req, res, next) => {
     try {
         // await res.send(`Working! You are on the products' new page!`);
-        res.render("products/new",{username:checkCurrUser(req)});
+        res.render("products/new",{user:checkCurrUser(req)});
     } catch (error) {
         console.log(error);
         res.send(error);
@@ -93,7 +92,7 @@ router.get("/:id", async (req, res, next) => {
             productCommentUsernames[i] = Products.findById(comment.user).username;
         }
 
-        res.render("products/show", { product,usersProducts,productComments,productCommentUsernames,username:checkCurrUser(req) });
+        res.render("products/show", { product,usersProducts,productComments,productCommentUsernames,user:checkCurrUser(req) });
     } catch (error) {
         console.log(error);
         res.send(error);
@@ -111,7 +110,7 @@ router.get("/:id/edit", async (req, res, next) => {
             res.send(`We don't have a 404 page, so you'll have to settle with this.<h1>404</h1>`)
             return 0;
         }else{
-            res.render("products/edit", { product,username:checkCurrUser(req) });
+            res.render("products/edit", { product,user:checkCurrUser(req) });
         }
     } catch (error) {
         console.log(error);
@@ -124,7 +123,7 @@ router.get("/:id/delete", async (req, res, next) => {
     try {
         // await res.json(await Products.findById(req.params.id));
         const product = await Products.findById(req.params.id);
-        res.render("products/delete", { product,username:checkCurrUser(req) });
+        res.render("products/delete", { product,user:checkCurrUser(req) });
     } catch (error) {
         console.log(error);
         res.send(error);
