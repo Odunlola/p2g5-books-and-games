@@ -149,6 +149,7 @@ router.post("/", async (req, res, next) => {
 // edit (put) route - designed for testing for now
 router.put("/:id", async (req, res, next) => {
     try {
+        const product = await Products.findById(req.params.id);
         if (req.session.currentUser.id!==product.user){
             res.send(`We don't have a 404 page, so you'll have to settle with this.<h1>404</h1>`)
             return 0;
@@ -164,6 +165,7 @@ router.put("/:id", async (req, res, next) => {
 // delete route - one at a time
 router.delete("/:id", async (req, res, next) => {
     try {
+            const product = await Products.findById(req.params.id);
         if (req.session.currentUser.id!==product.user){
             res.send(`We don't have a 404 page, so you'll have to settle with this.<h1>404</h1>`)
             return 0;
