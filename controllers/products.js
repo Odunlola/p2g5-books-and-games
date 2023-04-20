@@ -84,7 +84,13 @@ router.get("/:id", async (req, res, next) => {
 
         let productComments = await Comments.find({product:req.params.id}); //name for parity with views
 
-        res.render("products/show", { product,usersProducts,productComments });
+        let productCommentUsernames=[]; //parity
+        for (let i = 0; i < productComments.length; i++) {
+            const comment = productComments[i];
+            productCommentUsernames[i] = Products.findById(comment.user).username;
+        }
+
+        res.render("products/show", { product,usersProducts,productComments,productCommentUsernames });
     } catch (error) {
         console.log(error);
         res.send(error);
