@@ -66,8 +66,8 @@ app.use("/products", productController);
 app.get("/catalogue", async (req, res, next) => {
     try {
         // using Products for now
-        const guestProducts = await Products.find({});
-        res.render("products/index2", { guestProducts })
+        const catalogue = await Products.find({});
+        res.render("products/index2", { catalogue })
     } catch (error) {
         console.log(error);
         res.send(error);
