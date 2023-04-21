@@ -74,6 +74,19 @@ app.get("/catalogue", async (req, res, next) => {
     }
 })
 
+app.get("/*",(req,res,next)=>{
+    try {
+        if(typeof req.session.currentUser!=="undefined"){
+            res.render("products/404");
+        } else {
+            res.render("products/404b");
+        }
+    } catch (error) {
+        console.log(error);
+        res.send(error);
+    }
+})
+
 //server listener
 app.listen(PORT, ()=>{
     console.log(`Now listening on port ${PORT} Ω🔌 🔌Ω`);
