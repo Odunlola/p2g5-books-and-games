@@ -1,4 +1,7 @@
 <%- include("../partials/head.ejs") %>
+<% if(error) { %>
+    <h2><%= error %></h2>
+<% } %>
 <div style="margin:100px;">
 <h1 style="display: flex;justify-content: center;align-items: center;">Login to your account</h1>
 <form style="margin:100px;display: flex;justify-content: center;align-items: center;"method="POST" action="/login">
