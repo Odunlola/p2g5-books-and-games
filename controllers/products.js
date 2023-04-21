@@ -46,8 +46,7 @@ router.get("/", async (req, res, next) => {
         }
         res.render("products/index", { products, type, user: checkCurrUser(req) })
     } catch (error) {
-        console.log(error);
-        res.send(error);
+        next();
     }
 })
 
@@ -58,8 +57,7 @@ router.get("/seed", async (req, res, next) => {
         await Products.insertMany(seededData);
         res.redirect("/products");
     } catch (error) {
-        console.log(error);
-        res.send(error);
+        next();
     }
 })
 
@@ -68,8 +66,7 @@ router.get("/new", async (req, res, next) => {
     try {
         res.render("products/new", { user: checkCurrUser(req) });
     } catch (error) {
-        console.log(error);
-        res.send(error);
+        next();
     }
 })
 
@@ -102,8 +99,7 @@ router.get("/:id", async (req, res, next) => {
 
         res.render("products/show", { product, productComments, productCommentUsernames, user: checkCurrUser(req), error });
     } catch (error) {
-        console.log(error);
-        res.send(error);
+        next();
     }
 })
 
@@ -124,8 +120,7 @@ router.get("/:id/edit", async (req, res, next) => {
             res.render("products/edit", { product, user: checkCurrUser(req) });
         }
     } catch (error) {
-        console.log(error);
-        res.send(error);
+        next();
     }
 })
 
@@ -145,8 +140,7 @@ router.get("/:id/delete", async (req, res, next) => {
         // else let them delete
         res.render("products/delete", { product, user: checkCurrUser(req) });
     } catch (error) {
-        console.log(error);
-        res.send(error);
+        next();
     }
 })
 
@@ -165,8 +159,7 @@ router.post("/", async (req, res, next) => {
         newProd = await Products.create(newProd);
         res.redirect(`/products/${newProd._id}`)
     } catch (error) {
-        console.log(error);
-        res.send(error);
+        next();
     }
 })
 
@@ -186,8 +179,7 @@ router.put("/:id", async (req, res, next) => {
         const updatedProd = await Products.findByIdAndUpdate(req.params.id, req.body);
         res.redirect(`/products/${req.params.id}`)
     } catch (error) {
-        console.log(error);
-        res.send(error);
+        next();
     }
 })
 
@@ -207,8 +199,7 @@ router.delete("/:id", async (req, res, next) => {
         await Products.findByIdAndDelete(req.params.id);
         res.redirect("/products");
     } catch (error) {
-        console.log(error);
-        res.send(error);
+        next();
     }
 })
 
@@ -227,8 +218,7 @@ router.post("/:id/comments", async (req, res, next) => {
         await Comments.create(newComment);
         res.redirect(`/products/${req.params.id}`);
     } catch (error) {
-        console.log(error);
-        res.send(error);
+        next();
     }
 })
 

@@ -21,8 +21,7 @@ router.get("/login", (req, res, next) => {
         }
         res.render("users/login", { error });
     } catch (error) {
-        console.log(error);
-        res.send(error);
+        next();
     }
 })
 
@@ -39,8 +38,7 @@ router.get("/signup", (req, res, next) => {
         }
         res.render("users/signup", { error });
     } catch (error) {
-        console.log(error);
-        res.send(error);
+        next();
     }
 })
 
@@ -69,8 +67,7 @@ router.post("/login", async (req, res, next) => {
             res.redirect("/login?error=true");
         }
     } catch (error) {
-        console.log(error);
-        res.send(error);
+        next();
     }
 })
 
@@ -99,14 +96,17 @@ router.post("/signup", async (req, res, next) => {
         await Users.create(newUser);
         res.redirect("/login");
     } catch (error) {
-        console.log(error);
-        res.send(error);
+        next();
     }
 })
 
 router.get("/logout", async (req, res, next) => {
-    req.session.destroy();
-    res.redirect("/login")
+    try {
+        req.session.destroy();
+        res.redirect("/login")
+    } catch (error) {
+        next();
+    }
 })
 
 module.exports = router
