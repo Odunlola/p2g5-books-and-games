@@ -1,10 +1,16 @@
 
 nav{
-    font-family: 'Inter', sans-serif;font-size: 35;font-weight:normal; color:#030303
+    font-family: 'Inter', sans-serif;font-size: 35;font-weight:normal; color:#030303;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 body {
+    
     background-color: lightyellow;
+   
+
 }
 
 img {
@@ -23,4 +29,15 @@ img {
 }
 .home {
     height: 75vh;
+}
+
+.container-lg {
+    width: 1000px;
+    padding: 20px 50px 20px;
+    box-sizing: border-box;
+}
+
+.button {
+    padding: 15px 32px;
+    text-align: center;
 }

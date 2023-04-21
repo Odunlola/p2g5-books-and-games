@@ -5,11 +5,11 @@
     <body>
         <!-- change background image depends on {type} -->
         <%- include("../partials/header.ejs") %>
-        
+       
         <% if(user) { %>
-            <h3>Hello, <%= user %></h3>
+            <h3  style="position: fixed;left: 50px;">Hello, <%= user %></h3>
         <% } %>
-
+        </br>
         <% if (type === "Book") { %>
             <body style="background-image: url('/images/book3.jpeg'); background-size: 55vh; color:orangered;">
         <% }  else if (type === "Game") { %>
@@ -20,11 +20,8 @@
         
          <main class="container-lg">
 
-            <div>
-                <% if(typeof username !== 'undefined') { %>
-                    <h1>Welcome, <%= username %></h1>
-                <% } %>
-            </div>
+        </br>
+        <div style="margin: 0 auto;">
         <% for(let i = 0; i < products.length; i++) { %>
             <a href="/products/<%=products[i]._id %>">
                 <img src=<%= products[i].image %> alt="product image">
@@ -37,7 +34,7 @@
         <hr>
         <% } %>    
 
- 
+    </div>
          </main>
     </body>
 </html>
