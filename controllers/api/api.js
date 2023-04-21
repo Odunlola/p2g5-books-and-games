@@ -6,11 +6,11 @@ const router = express.Router();
 router.get("/", async (req, res, next) => {
     try {
         const products = await Products.find({});
-        res.json({products,status:res.statusCode});
+        res.json({ products, status: res.statusCode });
     } catch (error) {
         console.log(error);
-        res.json({status:res.statusCode,errors:error.errors});
+        res.json({ status: res.statusCode, errors: error.errors });
     }
 });
 
-module.exports=router;
+module.exports = router;
