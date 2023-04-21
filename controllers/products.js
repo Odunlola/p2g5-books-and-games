@@ -70,7 +70,15 @@ router.get("/new", async (req, res, next) => {
 // show route
 router.get("/:id", async (req, res, next) => {
     try {
-        // await res.json(await Products.findById(req.params.id));
+        let error;
+        switch (req.query.error) {
+            case "invalidrating":
+                error = "Invalid rating: Rating must be between 1 and 10";
+                break;
+            default:
+                break;
+        }
+
         const product = await Products.findById(req.params.id);
 
         // logic for getting and passing in comments
@@ -84,7 +92,7 @@ router.get("/:id", async (req, res, next) => {
             productCommentUsernames[i] = (commenter.username);
         }
 
-        res.render("products/show", { product, productComments, productCommentUsernames, user: checkCurrUser(req) });
+        res.render("products/show", { product, productComments, productCommentUsernames, user: checkCurrUser(req), error });
     } catch (error) {
         console.log(error);
         res.send(error);
@@ -186,8 +194,10 @@ router.delete("/:id", async (req, res, next) => {
 
 router.post("/:id/comments", async (req, res, next) => {
     try {
-
         let newComment = req.body;
+        if ((parseFloat(newComment.rating) > 10) || (parseFloat(newComment.rating) < 1)) {
+            res.redirect(`/products/${req.params.id}?error=invalidrating`);
+        }
         newComment.user = req.session.currentUser.id;
         newComment.product = req.params.id;
         await Comments.create(newComment);
