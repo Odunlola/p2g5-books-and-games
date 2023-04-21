@@ -2,6 +2,8 @@
 const express = require("express");
 const router = express.Router();
 
+const bcrypt = require("bcrypt")
+
 const seededData = require("../../models/seededData");
 
 // linking products model
@@ -57,7 +59,7 @@ router.post("/", async (req, res, next) => {
             res.json({msg:"Invalid credentials",status:res.statusCode})
             return 0;
         }
-        const userID= checkCredent(req.body.email,req.body.password);
+        const userID= await checkCredent(req.body.email,req.body.password);
         if(!userID){
             res.json({msg:"Invalid credentials",status:res.statusCode})
             return 0;
@@ -67,7 +69,7 @@ router.post("/", async (req, res, next) => {
         res.json({newProd,status:res.statusCode});
     } catch (error) {
         console.log(error);
-        res.json({status:res.statusCode,error});
+        res.json({status:res.statusCode,errors:error.errors});
     }
 })
 
