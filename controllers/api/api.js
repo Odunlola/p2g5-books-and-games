@@ -9,7 +9,7 @@ router.get("/", async (req, res, next) => {
         res.json({products,status:res.statusCode});
     } catch (error) {
         console.log(error);
-        res.json({status:res.statusCode});
+        res.json({status:res.statusCode,errors:error.errors});
     }
 });
 
