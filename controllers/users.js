@@ -14,11 +14,11 @@ router.get("/login", (req, res, next) => {
             case "privilege":
                 error = "You need to be logged in to do that."
                 break;
-        
+
             default:
                 break;
         }
-        res.render("users/login",{error});
+        res.render("users/login", { error });
     } catch (error) {
         console.log(error);
         res.send(error);
@@ -35,7 +35,7 @@ router.get("/signup", (req, res, next) => {
             default:
                 break;
         }
-        res.render("users/signup",{error});
+        res.render("users/signup", { error });
     } catch (error) {
         console.log(error);
         res.send(error);
@@ -70,8 +70,8 @@ router.post("/login", async (req, res, next) => {
 router.post("/signup", async (req, res, next) => {
     try {
         const newUser = req.body;
-        const userExists = (await Users.exists({ email: req.body.email }))||await Users.exists({username:req.body.username});
-        if (userExists){
+        const userExists = (await Users.exists({ email: req.body.email })) || await Users.exists({ username: req.body.username });
+        if (userExists) {
             res.redirect("/signup?error=exists");
             return 0;
         }

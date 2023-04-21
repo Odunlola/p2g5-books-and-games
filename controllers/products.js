@@ -5,13 +5,12 @@ const router = express.Router();
 const seededData = require("../models/seededData");
 
 // linking products model
-const { Products,Users, Comments } = require("../models");
-const User = require("../models/Users");
+const { Products, Users, Comments } = require("../models");
 
-function checkCurrUser(req){
+function checkCurrUser(req) {
     if (typeof req.session.currentUser !== "undefined") {
         return req.session.currentUser.username;
-    } else{
+    } else {
         return "Guest";
     }
 }
@@ -38,7 +37,7 @@ router.get("/", async (req, res, next) => {
             // if sQ is empty, products should return everything w/ matching type
             products = await Products.find({ productType: type, name: { $regex: new RegExp(searchQuery, "i") } });
         }
-        res.render("products/index", { products, type, user:checkCurrUser(req) })
+        res.render("products/index", { products, type, user: checkCurrUser(req) })
     } catch (error) {
         console.log(error);
         res.send(error);
@@ -61,7 +60,7 @@ router.get("/seed", async (req, res, next) => {
 router.get("/new", async (req, res, next) => {
     try {
         // await res.send(`Working! You are on the products' new page!`);
-        res.render("products/new",{user:checkCurrUser(req)});
+        res.render("products/new", { user: checkCurrUser(req) });
     } catch (error) {
         console.log(error);
         res.send(error);
@@ -76,16 +75,16 @@ router.get("/:id", async (req, res, next) => {
 
         // logic for getting and passing in comments
 
-        let productComments = await Comments.find({product:req.params.id}); //name for parity with views
+        let productComments = await Comments.find({ product: req.params.id }); //name for parity with views
 
-        let productCommentUsernames=[]; //parity
+        let productCommentUsernames = []; //parity
         for (let i = 0; i < productComments.length; i++) {
             const comment = productComments[i];
             const commenter = await Users.findById(comment.user);
             productCommentUsernames[i] = (commenter.username);
         }
 
-        res.render("products/show", { product,productComments,productCommentUsernames,user:checkCurrUser(req) });
+        res.render("products/show", { product, productComments, productCommentUsernames, user: checkCurrUser(req) });
     } catch (error) {
         console.log(error);
         res.send(error);
@@ -96,14 +95,14 @@ router.get("/:id", async (req, res, next) => {
 router.get("/:id/edit", async (req, res, next) => {
     try {
         const product = await Products.findById(req.params.id);
-        if (typeof req.session.currentUser.id==="undefined"){
+        if (typeof req.session.currentUser.id === "undefined") {
             res.redirect("/login?error=privilege");
             return 0;
-        }else if (req.session.currentUser.id!==product.user.toString()){
+        } else if (req.session.currentUser.id !== product.user.toString()) {
             res.send(`<h1>It appears you can't do that.</h1>`)
             return 0;
-        }else{
-            res.render("products/edit", { product,user:checkCurrUser(req) });
+        } else {
+            res.render("products/edit", { product, user: checkCurrUser(req) });
         }
     } catch (error) {
         console.log(error);
@@ -115,14 +114,14 @@ router.get("/:id/edit", async (req, res, next) => {
 router.get("/:id/delete", async (req, res, next) => {
     try {
         const product = await Products.findById(req.params.id);
-        if (typeof req.session.currentUser.id==="undefined"){
+        if (typeof req.session.currentUser.id === "undefined") {
             res.redirect("/login?error=privilege");
             return 0;
-        }else if (req.session.currentUser.id!==product.user.toString()){
+        } else if (req.session.currentUser.id !== product.user.toString()) {
             res.send(`<h1>It appears you can't do that.</h1>`)
             return 0;
         }
-        res.render("products/delete", { product,user:checkCurrUser(req) });
+        res.render("products/delete", { product, user: checkCurrUser(req) });
     } catch (error) {
         console.log(error);
         res.send(error);
@@ -132,7 +131,7 @@ router.get("/:id/delete", async (req, res, next) => {
 // new post route 
 router.post("/", async (req, res, next) => {
     try {
-        if (typeof req.session.currentUser.id==="undefined"){
+        if (typeof req.session.currentUser.id === "undefined") {
             res.redirect("/login?error=privilege");
             return 0;
         }
@@ -150,10 +149,10 @@ router.post("/", async (req, res, next) => {
 router.put("/:id", async (req, res, next) => {
     try {
         const product = await Products.findById(req.params.id);
-        if (typeof req.session.currentUser.id==="undefined"){
+        if (typeof req.session.currentUser.id === "undefined") {
             res.redirect("/login?error=privilege");
             return 0;
-        }else if (req.session.currentUser.id!==product.user.toString()){
+        } else if (req.session.currentUser.id !== product.user.toString()) {
             res.send(`<h1>It appears you can't do that.</h1>`)
             return 0;
         }
@@ -169,10 +168,10 @@ router.put("/:id", async (req, res, next) => {
 router.delete("/:id", async (req, res, next) => {
     try {
         const product = await Products.findById(req.params.id);
-        if (typeof req.session.currentUser.id==="undefined"){
+        if (typeof req.session.currentUser.id === "undefined") {
             res.redirect("/login?error=privilege");
             return 0;
-        }else if (req.session.currentUser.id!==product.user.toString()){
+        } else if (req.session.currentUser.id !== product.user.toString()) {
             console.log(req.session.currentUser.id, product.user)
             res.send(`<h1>It appears you can't do that.</h1>`)
             return 0;
@@ -185,9 +184,9 @@ router.delete("/:id", async (req, res, next) => {
     }
 })
 
-router.post("/:id/comments",async(req,res,next)=>{
+router.post("/:id/comments", async (req, res, next) => {
     try {
-        
+
         let newComment = req.body;
         newComment.user = req.session.currentUser.id;
         newComment.product = req.params.id;
