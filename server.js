@@ -69,6 +69,18 @@ app.get("/catalogue", async (req, res, next) => {
         const catalogue = await Products.find({});
         res.render("products/index2", { catalogue })
     } catch (error) {
+        next();
+    }
+})
+
+app.get("/*",(req,res,next)=>{
+    try {
+        if(typeof req.session.currentUser!=="undefined"){
+            res.render("products/404");
+        } else {
+            res.render("products/404b");
+        }
+    } catch (error) {
         console.log(error);
         res.send(error);
     }
