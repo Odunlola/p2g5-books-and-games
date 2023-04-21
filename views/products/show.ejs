@@ -6,25 +6,26 @@
       <main class="container-lg">
 
          <!-- add main element -->
-          <table>
+          
  
           <th>
              <img src=<%= product.image %> alt="product image">
          </th>
-          <th>
+          <div style="padding: 20px ">
              <h1><%= product.name %></h1>
              <h3>By <%= product.author %></h3>
              <h6><%= product.productType %></h6>
              <h3>$<%= product.price %></h3>
-             <a href="/products/<%= product._id %>/edit"><button style="background-color: black; color: white">EDIT</button> </a>
+             <a href="/products/<%= product._id %>/edit"><button style="width:200px;text-align: center;background-color: black; color: white">EDIT</button> </a>
           </br>
-             <a href="/products/<%= product._id %>/delete"><button style="background-color: black; color: white">DELETE</button> </a>
+             <a href="/products/<%= product._id %>/delete"><button style="width: 200px;background-color: black; color: white">DELETE</button> </a>
           </br>
-             <a href="/products/new"><button style="background-color: black; color: white">ADD NEW</button> </a>
-            </th>
-    
+             <a href="/products/new"><button style="width: 200px;background-color: black; color: white">ADD NEW</button> </a>
+            </div>
+
+            <table>
     <form method="POST" action="/products/<%= product._id %>/comments">
-        Rating: <input type="text" name="rating">
+        Rating: <input type="text" name="rating"value="Rate product 1 - 10">
         Comment: <input type="text" name="text">
         <input type="submit" value="Submit this rating">
     </form>
@@ -34,6 +35,7 @@
         <p>Rating by: <%= productCommentUsernames[i] %></p>
         <hr>
     <% } %>
+
          </table>
  
     
