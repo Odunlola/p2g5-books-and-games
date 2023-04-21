@@ -5,7 +5,9 @@ const commentSchema = new mongoose.Schema (
     {
         rating:{
             type:Number,
-            required:[true, "Please have a rating."]
+            required:[true, "Please have a rating"],
+            min:1,
+            max:10
         },
         text:{
             type:String,
@@ -14,11 +16,13 @@ const commentSchema = new mongoose.Schema (
         },
         user:{
             type:mongoose.Schema.Types.ObjectId,
-            ref:"user"
+            ref:"user",
+            required:[true, "must be a user"]
         },
         product:{
             type:mongoose.Schema.Types.ObjectId,
-            ref:"products"
+            ref:"products",
+            required:[true, "must have a product"]
         }
 
     },{
