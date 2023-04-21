@@ -1,0 +1,17 @@
+<%- include("../partials/head.ejs") %>
+<% if(error) { %>
+    <h2><%= error %></h2>
+<% } %>
+<div style="margin:100px;">
+<h1 style="display: flex;justify-content: center;align-items: center;">Login to your account</h1>
+<form style="margin:100px;display: flex;justify-content: center;align-items: center;"method="POST" action="/login">
+<label for="email">Email:</label>
+<input type="text" name="email" id="email" placeholder="something@gmail.com">
+ <label for="password">Password:</label>
+ <input type="password" name="password" id="password">
+ <input type="submit" value="Login">
+</form>
+</div>
+</br>
+<footer style="display: flex;justify-content: center;align-items: center;"> <a href="/"><button style="background-color: black; color: white">Back to Home Page</button> </a>
+</footer>

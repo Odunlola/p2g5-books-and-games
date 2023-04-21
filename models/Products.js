@@ -21,6 +21,11 @@ const productSchema = new mongoose.Schema(
         productType:{
             type:String,
             required:[true, "either Book for Game"]
+        },
+        user:{
+            type:mongoose.Schema.Types.ObjectId,
+            ref:"user",
+            required:[true, "must be a user"]
         }
     },{
         timestamps:true
@@ -29,5 +34,5 @@ const productSchema = new mongoose.Schema(
 
 
 //make Products model
-const Products = mongoose.model("Products", productSchema);
+const Products = mongoose.model("products", productSchema);
 module.exports = Products;

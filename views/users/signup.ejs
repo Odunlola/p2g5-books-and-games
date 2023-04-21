@@ -1,0 +1,17 @@
+<%- include("../partials/head.ejs") %>
+<% if(error) { %>
+    <h2><%= error %></h2>
+<% } %>
+<h1 style="margin:100px;display: flex;justify-content: center;align-items: center;">Signup for an account</h1>
+<form style="margin:100px;display: flex;justify-content: center;align-items: center;"method="POST" action="/signup">
+    <label for="email">Email:</label>
+    <input type="text" name="email" id="email" placeholder="something@gmail.com">
+    <label for="username">Username:</label>
+    <input type="text" name="username" id="username" placeholder="abc123">
+    <label for="password">Password:</label>
+    <input type="text" name="password" id="password">
+    <input type="submit" value="Create a new user">
+</form>
+</br>
+<footer style="display: flex;justify-content: center;align-items: center;"></footerstyle><a href="/"><button style="background-color: black; color: white";>Back to Home Page</button> </a>
+</footer>

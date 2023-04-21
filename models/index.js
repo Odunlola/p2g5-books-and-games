@@ -4,6 +4,10 @@ require("../config/connection");
 
 module.exports = {
     Products : require("./Products"),
-    seededData : require("./seededData")
-}
+    seededData : require("./seededData"),
+    Users : require("./Users"),
+    Comments : require("./Comments")
+};
+
+
 
