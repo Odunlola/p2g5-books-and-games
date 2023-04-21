@@ -27,7 +27,15 @@ router.get("/login", (req, res, next) => {
 
 router.get("/signup", (req, res, next) => {
     try {
-        res.render("users/signup");
+        let error;
+        switch (req.query.error) {
+            case "exists":
+                error = "Username or email already exists";
+                break;
+            default:
+                break;
+        }
+        res.render("users/signup",{error});
     } catch (error) {
         console.log(error);
         res.send(error);
@@ -62,6 +70,11 @@ router.post("/login", async (req, res, next) => {
 router.post("/signup", async (req, res, next) => {
     try {
         const newUser = req.body;
+        const userExists = (await Users.exists({ email: req.body.email }))||await Users.exists({username:req.body.username});
+        if (userExists){
+            res.redirect("/signup?error=exists");
+            return 0;
+        }
         const rounds = parseInt(process.env.SALT_ROUNDS);
         const salt = await bcrypt.genSalt(rounds);
         const hash = await bcrypt.hash(newUser.password, salt);
