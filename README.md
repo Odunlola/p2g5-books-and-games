@@ -48,11 +48,9 @@ Bootstrap
 Env
 JSON
 
-Getting Started:
 
-Link to the project app: 
+Link to the project app/ render: https://books-and-games-ed6h.onrender.com/
 
-Instructions-
 
 Next Steps: Planned Future Enhancements - create individual user access.
 
